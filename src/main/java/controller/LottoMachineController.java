@@ -22,7 +22,7 @@ public class LottoMachineController {
         int lottoPrice = inputView.readLottoPrice();
         List<Lotto> lottos = createLottos(lottoPrice);
 
-        inputView.readWinningNumbers();
+        Lotto winningLotto = new Lotto(inputView.readWinningNumbers());
         int bonusNumber = inputView.readBonusNumber();
     }
 
