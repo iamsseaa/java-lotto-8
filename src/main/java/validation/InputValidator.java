@@ -23,4 +23,6 @@ public class InputValidator {
             throw new IllegalArgumentException("[Error] 로또 구입 금액은 1000원 이상부터 가능합니다.");
         }
     }
+
+
 }
