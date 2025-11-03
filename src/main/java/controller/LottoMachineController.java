@@ -15,5 +15,6 @@ public class LottoMachineController {
 
     public void startLottoMachine() {
         int lottoPrice = inputView.readLottoPrice();
+        inputView.readWinningNumbers();
     }
 }
