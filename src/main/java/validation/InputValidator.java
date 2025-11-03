@@ -1,5 +1,7 @@
 package validation;
 
+import java.util.InputMismatchException;
+
 public class InputValidator {
 
     private InputValidator() {
@@ -34,7 +36,7 @@ public class InputValidator {
 
         try {
             Integer.parseInt(input.trim());
-        } catch (NumberFormatException e) {
+        } catch (InputMismatchException e) {
             throw new IllegalArgumentException("[ERROR] 입력은 숫자만 가능합니다.");
         }
     }

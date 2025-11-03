@@ -11,26 +11,47 @@ public class InputView {
     private static final String DELIMITER = ",";
 
     public int readLottoPrice() {
-        System.out.println("구입 금액을 입력해 주세요.");
-        String input = Console.readLine();
+        while (true) {
+        try {
+            System.out.println("구입 금액을 입력해 주세요.");
+            String input = Console.readLine();
 
-        return InputValidator.lottoPrice(input);
+            int price = InputValidator.lottoPrice(input);
+
+            return price;
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        }
     }
 
     public List<Integer> readWinningNumbers() {
-        System.out.println("당첨 번호를 입력해 주세요.");
-        String input = Console.readLine();
-        List<Integer> numbers = Arrays.stream(input.split(DELIMITER))
-                .map(s -> Integer.parseInt(s.trim())) // 공백 제거 후 숫자로 변환
-                .collect(Collectors.toList());
+        while (true) {
+            try {
+                System.out.println("당첨 번호를 입력해 주세요.");
+                String input = Console.readLine();
+                List<Integer> numbers = Arrays.stream(input.split(DELIMITER))
+                        .map(s -> Integer.parseInt(s.trim()))
+                        .collect(Collectors.toList());
 
-        return numbers;
+                return numbers;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     public int readBonusNumber() {
-        System.out.println("보너스 번호를 입력해 주세요.");
-        int input = Integer.parseInt(Console.readLine());
+        while (true) {
+            try {
+                System.out.println("보너스 번호를 입력해 주세요.");
+                int input = Integer.parseInt(Console.readLine());
 
-        return input;
+                return input;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
