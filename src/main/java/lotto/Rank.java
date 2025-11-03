@@ -1,12 +1,22 @@
 package lotto;
 
 public enum Rank {
-    FIRST,
-    SECOND,
-    THIRD,
-    FOURTH,
-    FIFTH,
-    MISS;
+    FIRST(2_000_000_000L),
+    SECOND(30_000_000L),
+    THIRD(1_500_000L),
+    FOURTH(50_000L),
+    FIFTH(5_000L),
+    MISS(0L);
+
+    private final long prizeMoney;
+
+    Rank(long prizeMoney) {
+        this.prizeMoney = prizeMoney;
+    }
+
+    public long getPrizeMoney() {
+        return prizeMoney;
+    }
 
     public static Rank valueOf(long matchCount, boolean hasBonus) {
         if (matchCount == 6) {

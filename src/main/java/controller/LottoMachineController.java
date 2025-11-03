@@ -25,7 +25,8 @@ public class LottoMachineController {
     }
 
     public void startLottoMachine() {
-        int count = inputView.readLottoPrice() / 1000;
+        int lottoPrice = inputView.readLottoPrice();
+        int count = lottoPrice / 1000;
         List<Lotto> lottos = createLottos(count);
         outputView.printUserLottos(count, lottos);
 
@@ -33,7 +34,11 @@ public class LottoMachineController {
         int bonusNumber = inputView.readBonusNumber();
 
         Map<Rank, Integer> statistics = calculateStatistics(lottos, winningLotto, bonusNumber);
+        long totalWinnings = calculateTotalWinnings(statistics);
+        double profitRate = ((double) totalWinnings / (double) lottoPrice) * 100.0;
+
         outputView.printStatistics(statistics);
+        outputView.printProfitRate(profitRate);
     }
 
     public List<Lotto> createLottos(int count) {
@@ -54,6 +59,17 @@ public class LottoMachineController {
             statistics.put(rank, statistics.get(rank) + 1);
         }
         return statistics;
+    }
+
+    private long calculateTotalWinnings(Map<Rank, Integer> statistics) {
+        // Java Stream을 사용한 계산
+        return statistics.entrySet().stream()
+                .mapToLong(entry -> {
+                    Rank rank = entry.getKey();
+                    int count = entry.getValue();
+                    return rank.getPrizeMoney() * count;
+                })
+                .sum();
     }
 
 }
