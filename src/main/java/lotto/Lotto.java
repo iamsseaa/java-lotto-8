@@ -45,4 +45,8 @@ public class Lotto {
     public boolean contains(int number) {
         return this.numbers.contains(number);
     }
+
+    public void printNumbers() {
+        System.out.println(numbers);
+    }
 }

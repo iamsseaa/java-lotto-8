@@ -9,12 +9,15 @@ import java.util.stream.Stream;
 import lotto.Lotto;
 import lotto.Rank;
 import view.InputView;
+import view.OutputView;
 
 public class LottoMachineController {
     private final InputView inputView;
+    private final OutputView outputView;
 
     public LottoMachineController() {
         this.inputView = new InputView();
+        this.outputView = new OutputView();
     }
 
     public void run() {
@@ -22,8 +25,9 @@ public class LottoMachineController {
     }
 
     public void startLottoMachine() {
-        int lottoPrice = inputView.readLottoPrice();
-        List<Lotto> lottos = createLottos(lottoPrice);
+        int count = inputView.readLottoPrice() / 1000;
+        List<Lotto> lottos = createLottos(count);
+        outputView.printUserLottos(count, lottos);
 
         Lotto winningLotto = new Lotto(inputView.readWinningNumbers());
         int bonusNumber = inputView.readBonusNumber();
@@ -31,8 +35,7 @@ public class LottoMachineController {
         Map<Rank, Integer> statistics = calculateStatistics(lottos, winningLotto, bonusNumber);
     }
 
-    public List<Lotto> createLottos(int lottoPrice) {
-        int count = lottoPrice / 1000;
+    public List<Lotto> createLottos(int count) {
         return Stream.generate(() -> new Lotto(Randoms.pickUniqueNumbersInRange(1, 45, 6))).limit(count).collect(Collectors.toList());
     }
 
