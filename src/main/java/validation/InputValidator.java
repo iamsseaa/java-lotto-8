@@ -6,10 +6,13 @@ public class InputValidator {
 
     }
 
-    public static int lottoPrice(int lottoPrice) {
-        validateAmountByThousand(lottoPrice);
-        validateMinimumPrice(lottoPrice);
-        return lottoPrice;
+    public static int lottoPrice(String lottoPrice) {
+        int price = Integer.parseInt(lottoPrice);
+
+        validateNumeric(lottoPrice);
+        validateAmountByThousand(price);
+        validateMinimumPrice(price);
+        return price;
     }
 
     private static void validateAmountByThousand(int lottoPrice) {
@@ -24,4 +27,15 @@ public class InputValidator {
         }
     }
 
+    private static void validateNumeric(String input) {
+        if (input == null || input.trim().isEmpty()) {
+            throw new IllegalArgumentException("[ERROR] 입력값이 비어있습니다.");
+        }
+
+        try {
+            Integer.parseInt(input.trim());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 입력은 숫자만 가능합니다.");
+        }
+    }
 }
