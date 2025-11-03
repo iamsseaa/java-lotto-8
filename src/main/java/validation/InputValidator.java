@@ -9,9 +9,10 @@ public class InputValidator {
     }
 
     public static int lottoPrice(String lottoPrice) {
+       validateNumeric(lottoPrice);
+
         int price = Integer.parseInt(lottoPrice);
 
-        validateNumeric(lottoPrice);
         validateAmountByThousand(price);
         validateMinimumPrice(price);
         return price;
@@ -34,9 +35,7 @@ public class InputValidator {
             throw new IllegalArgumentException("[ERROR] 입력값이 비어있습니다.");
         }
 
-        try {
-            Integer.parseInt(input.trim());
-        } catch (InputMismatchException e) {
+        if (!input.matches("-?\\d+")) {
             throw new IllegalArgumentException("[ERROR] 입력은 숫자만 가능합니다.");
         }
     }
