@@ -35,4 +35,14 @@ public class Lotto {
             }
         }
     }
+
+    public long countMatches(Lotto otherLotto) {
+        return this.numbers.stream()
+                .filter(otherLotto.numbers::contains)
+                .count();
+    }
+
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
+    }
 }
