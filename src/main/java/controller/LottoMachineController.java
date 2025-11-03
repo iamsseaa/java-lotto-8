@@ -33,6 +33,7 @@ public class LottoMachineController {
         int bonusNumber = inputView.readBonusNumber();
 
         Map<Rank, Integer> statistics = calculateStatistics(lottos, winningLotto, bonusNumber);
+        outputView.printStatistics(statistics);
     }
 
     public List<Lotto> createLottos(int count) {
